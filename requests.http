@@ -1,0 +1,85 @@
+### Register a user
+POST http://localhost:9012/users/
+Content-Type: application/json
+
+{
+    "name": "Mxx10",
+    "email": "mxx10@example.org",
+    "password": "!Lavamud_Cake123"
+}
+
+### Login a user
+POST http://localhost:9012/users/login
+Content-Type: application/json
+
+{
+    "email": "mxx8@example.org",
+    "password": "!Lavamud_Cake123"
+}
+
+### Landing page - events of today
+GET http://localhost:9012/events/today
+
+
+### Search events
+POST http://localhost:9012/events/search
+    # it was a GET request before w/ req.query
+    # ?category=Free
+    # &date=2021-12-10T12:00:00.000Z
+    # &keyword=Plastic
+Content-Type: application/json
+
+{
+    // if you comment out search parameters, get rid of the comma
+    //"category": "Free",
+    "category": "Anything",
+    //"date": "2021-12-22T12:00:00.000Z"
+    "date": "This weekend"
+    //"keyword": "Home"
+}
+
+### Get event page - after each backup start, you need to get a fresh eventId from Compass/Atlas for the url
+GET http://localhost:9012/events/61b7783b02564fa294a688e8
+
+### Add an event
+POST http://localhost:9012/users/61af272e8b7b64ac14434cc2/events
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWFmMjcyZThiN2I2NGFjMTQ0MzRjYzIiLCJpYXQiOjE2MzkwNDgxMTN9.Txw5hDMdRHNaaIJ6e_-k81l-jXn8qaa5GNLCIWMxoz0
+Content-Type: application/json
+Date: {{$datetime iso8601}}    
+
+{
+    "name": "event.name",
+    "address": "event.address",
+    "category": "Workshop",
+    "summary": "event.summary",
+    "description": "event.description",
+    "start_date": "{{$localDatetime "2022-02-23 12:00"}}",
+    "end_date": "{{$localDatetime "2022-02-23 16:00"}}",
+    "start_time": "{{$localDatetime "2022-02-23 12:00"}}",
+    "end_time": "{{$localDatetime "2022-02-23 16:00"}}",
+    "free_event": true,
+    "price": 0,
+    "booking_required": false,
+    "booking_site": "",
+    "website": "example.eventpage.com",
+    "email": "event@example.org",
+    "phone": "+30563499362524254",
+    "instagram": "@eventexample",
+    "facebook": "event.facebook.com",
+    "image": ""
+}
+
+### Add event to wishlist - first create an event, take that _id for this test
+POST http://localhost:9012/users/61af272e8b7b64ac14434cc2/events/61b85df7e9348deb052242c7
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWFmMjcyZThiN2I2NGFjMTQ0MzRjYzIiLCJpYXQiOjE2MzkwNDgxMTN9.Txw5hDMdRHNaaIJ6e_-k81l-jXn8qaa5GNLCIWMxoz0
+
+### Delete event from wishlist - same as above
+DELETE http://localhost:9012/users/61af272e8b7b64ac14434cc2/events/61b85df7e9348deb052242c7
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWFmMjcyZThiN2I2NGFjMTQ0MzRjYzIiLCJpYXQiOjE2MzkwNDgxMTN9.Txw5hDMdRHNaaIJ6e_-k81l-jXn8qaa5GNLCIWMxoz0
+
+### Get user's wishlist
+GET http://localhost:9012/users/61af272e8b7b64ac14434cc2/events/wishlist
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWFmMjcyZThiN2I2NGFjMTQ0MzRjYzIiLCJpYXQiOjE2MzkwNDgxMTN9.Txw5hDMdRHNaaIJ6e_-k81l-jXn8qaa5GNLCIWMxoz0
