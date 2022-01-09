@@ -9,7 +9,7 @@ Backend to [WhatToDo-App](https://github.com/mariagluck/WhatToDo-frontend)
 - create .env file (see env.example)
 - npm start
 
-### Deplyment in Heroku
+### Deployment in Heroku
 
 https://whattodooo.herokuapp.com
 
